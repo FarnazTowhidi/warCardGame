@@ -1,0 +1,52 @@
+// Pseudocode of war card game
+
+
+shuffle Deck
+give player 1 cards
+give player 2 cards
+while players do not have any cards
+    get top card from player 1 bucket (or random)
+    get top card from player 2 bucket (or random)
+    if player1 card > player2 card (base on rule)
+        push all tableCards to player1 cards buket
+
+    elseif player2 card > player1 card 
+        push all tableCards to player2 cards buket
+    else
+        push player1 card and player2 card to tableCards
+end while
+
+if player 1 do not have any card
+    player 2 get all player 1 card, plus table card
+    player 1 win
+else
+    player 1 get all player 2 card, plus table card
+    player 2 win
+
+
+
+
+
+function suffle 
+    for each player
+        for each suit (1 to 4)
+            while player card bucker = 14
+                while randomFlag
+                select random number from 1 to 14 (2,3,4,5,6,7,8,9,10, J,Q, K,A)
+                if the number is not withine player bucker
+                    add card to player bucket
+                    randomFlag = false
+                    return
+                else
+        end for
+    end for            
+
+
+
+
+
+
+
+
+suit: 4 ()
+Card rank rules: A> K> Q> J > 10 > 9> 8> 7> 6> 5> 4> 3> 2
