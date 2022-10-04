@@ -17,39 +17,37 @@
 
   <body>
     <h1>War Card Game</h1>
-    <div class="bg"></div>
-
     <div class="gameContainer">
       <div id="player1">
-        <img src="./images/player1.jpg" alt="" style="width: 200px" />
+        <h2>Player1</h2>
+        <img src="./images/player1.jpg" /><br />
+        <img id="imgPlayer1Card" class="card playerCard1" src="" />
+        <p id="p1"></p>
       </div>
 
       <div id="player2">
-        <img src="./images/player2.jpg" alt="" style="width: 200px" />
+        <h2>Player2</h2>
+        <img src="./images/player2.jpg" /><br />
+        <img id="imgPlayer2Card" class="card playerCard2" src="" />
+        <p id="p2"></p>
       </div>
 
-      <div class="imgPlayer1Card" alt="player1">
-        <img class="card" src="./images/clubs/clubs-J.svg" />
-      </div>
       <div class="warZoneContainer">
-        <img src="./images/hearts/hearts-K.svg" />
-        <img src="./images/diamonds/diamonds-K.svg" />
-        <img src="./images/clubs/clubs-K.svg" />
-        <img src="./images/spades/spades-K.svg" />
+        <div>
+          <img src="" />
+          <img src="" />
+        </div>
       </div>
-      <div class="imgPlayer2Card" alt="player2">
-        <img
-          class="card"
-          id="imgPlayer2Card"
-          src="./images/hearts/hearts-r04.svg"
-          alt=""
+
+      <div class="buttons">
+        <input type="button" class="buttons" id="inpShuffle" value="Suffle" />
+        <input
+          type="button"
+          class="buttons btndeal"
+          id="inpDeal"
+          value="draw"
         />
       </div>
-    </div>
-
-    <div>
-      <input type="button" class="buttons" id="inpShuffle" value="Suffle" />
-      <input type="button" class="buttons" id="inpDeal" value="Deal" />
     </div>
   </body>
 </html>
