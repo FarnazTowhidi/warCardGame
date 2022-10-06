@@ -5,53 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>War Card Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <script defer src="./main.js"></script>
     <link rel="stylesheet" href="./style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap"
-      rel="stylesheet"
-    />
   </head>
 
   <body>
-    <h1>War Card Game</h1>
     <div class="gameContainer">
-      <div id="player1">
+      <div id="player1Container">
         <h2>Player1</h2>
-        <img src="./images/player1.jpg" /><br />
-        <img id="imgPlayer1Card" class="card playerCard1" src="" />
-        <p id="p1"></p>
+        <img src="./images/player1.jpg" class="card" /><br />
+        <img id="imgPlayer1Card" class="card playerCard1" />
+        <p id="parPlayer1"></p>
       </div>
 
-      <div id="player2">
+      <div id="player2Container">
         <h2>Player2</h2>
-        <img src="./images/player2.jpg" /><br />
-        <img id="imgPlayer2Card" class="card playerCard2" src="" />
-        <p id="p2"></p>
+        <img src="./images/player2.jpg" class="card" /><br />
+        <img id="imgPlayer2Card" class="card playerCard2" />
+        <p id="parPlayer2"></p>
       </div>
 
-      <div class="warZoneContainer">
-        <div>
-          <img src="" />
-          <img src="" />
+      <div class="CenterContainer">
+        <h1>War Card Game</h1>
+        <div id="warZone"></div>
+
+        <div class="buttonsContainer">
+          <input type="button" class="buttons" id="btnShuffle" value="Suffle" />
+          <input type="button" class="buttons" id="btnDeal" value="draw" />
         </div>
-      </div>
-
-      <div class="buttons">
-        <input type="button" class="buttons" id="inpShuffle" value="Suffle" />
-        <input
-          type="button"
-          class="buttons btndeal"
-          id="inpDeal"
-          value="draw"
-        />
+        <span id="parWin"></span>
       </div>
     </div>
   </body>
 </html>
-
-<!-- <div class="imgPlayer1Card">
-        <img src="./images/clubs/clubs-J.svg" style="width: 10%" alt="" />
-      </div> -->

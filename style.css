@@ -1,72 +1,71 @@
 body {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   padding: 0 20px 0 20px;
   background-color: black;
   color: white;
+  font-family: "Raleway", sans-serif;
+  font-size: 12px;
 }
 
 h1 {
   text-align: center;
-  color: white;
-  font-family: "Orbitron", sans-serif;
   font-size: 60px;
 }
-/* .bg {
-  background-image: url("./images/card-games.jpeg");
-  opacity: 0.2;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
-  position: absolute;
-} */
 
 .gameContainer {
   display: grid;
-  grid-template-rows: 2;
+  grid-template-rows: 1;
   grid-template-columns: 3;
-  grid-template-areas:
-    "player1 warZone player2"
-    ". buttons .";
+  grid-template-areas: "player1 gameCenter player2";
 }
 
-#player1 {
+#player1Container {
   grid-area: player1;
+  text-align: center;
 }
 
-#player2 {
+#player2Container {
   grid-area: player2;
+  text-align: center;
+}
+
+.CenterContainer {
+  grid-area: gameCenter;
+  display: grid;
+  margin: 50px;
+  text-align: center;
+  grid-template-areas: "warZone";
 }
 
 .card {
   background-color: white;
-  width: 200px;
+  width: 130px;
 }
 
-.imgPlayer1Card {
-  grid-area: playerDeck1;
+.cardWar {
+  position: absolute;
+  width: 150px;
+  filter: drop-shadow(10px 10px 4px #d8d8db);
+  background-color: aliceblue;
 }
 
-.imgPlayer2Card {
-  grid-area: playerDeck2;
-}
-
-.warZoneContainer {
-  background: gray;
+#warZone {
+  position: relative;
   background-image: url("https://static.vecteezy.com/system/resources/previews/002/375/040/original/modern-white-background-free-vector.jpg");
-  opacity: 1;
-  grid-area: warZone;
-  margin: 50px;
-  border: 3px solid gray;
-  width: 500px;
-  height: 350px;
+  border: 1px solid gray;
+  width: 100%;
+  margin: 10px;
+  min-height: 400px;
+}
+
+.buttonsContainer {
+  grid-area: buttonsContainer;
+  grid-column: 1;
+  justify-items: center;
 }
 
 .buttons {
-  grid-area: buttons;
-  background: transparent;
   background-color: white;
   color: whblackite;
   width: 100px;
@@ -75,5 +74,9 @@ h1 {
 
 .btndeal {
   display: none;
-  color: red;
+}
+
+#parWin {
+  font-size: 40px;
+  color: rgb(211, 211, 4);
 }
