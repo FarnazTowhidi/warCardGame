@@ -7,8 +7,17 @@ For seeing a video for how to play [click here!] (https://youtu.be/J5vT33Vo04s)
 
 ### Screen shot
 
+<img src="./images/warCardScreenShot.png"
+      />
+
 ### Technologies used
+
+The project is done using Html, CSS and javascript.
 
 ### Getting Started
 
+In the process.
+
 ### Next Steps
+
+The project can be more efficient to define two object for player and cards.
