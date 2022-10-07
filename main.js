@@ -155,11 +155,6 @@ function renderFillWarZone(Deck, showBackFlag) {
   to the winner
 */
 function renderWinnerCounter(flgPlayer) {
-<<<<<<< HEAD
-  // Add Cards of war zone to winner counter
-
-=======
->>>>>>> main
   flgPlayer == 1
     ? (state.player1Counter = state.player1Counter + state.tableCards.length)
     : (state.player2Counter = state.player2Counter + state.tableCards.length);
