@@ -34,7 +34,7 @@ inpSuffle.addEventListener("click", shuffle);
 inpDraw.addEventListener("click", draw);
 
 /*
-  This function shuffle the deck and
+  The function shuffle the deck and
   divide it to two players
 */
 function shuffle() {
@@ -66,7 +66,7 @@ function shuffle() {
 }
 
 /*
-  Function that shows the top card of each player
+  The function that shows the top card of each player
   and comapre them
  */
 function draw() {
@@ -90,7 +90,7 @@ function draw() {
 }
 
 /*
- This function compare 2 cards and find
+ The function compare 2 cards and find
  who is the winner, its either player1, player2 or going to war
  @card1: Player1's card
  @card2: Player2's card
@@ -132,8 +132,8 @@ function compareCards(card1, card2) {
 }
 
 /*
-Function add image to war zone 
-and then delete image from deck
+  The function add image to war zone 
+  and then delete image from deck
 */
 function renderFillWarZone(Deck, showBackFlag) {
   let divImagContainer = document.createElement("div");
@@ -155,8 +155,11 @@ function renderFillWarZone(Deck, showBackFlag) {
   to the winner
 */
 function renderWinnerCounter(flgPlayer) {
+<<<<<<< HEAD
   // Add Cards of war zone to winner counter
 
+=======
+>>>>>>> main
   flgPlayer == 1
     ? (state.player1Counter = state.player1Counter + state.tableCards.length)
     : (state.player2Counter = state.player2Counter + state.tableCards.length);
@@ -166,8 +169,8 @@ function renderWinnerCounter(flgPlayer) {
 }
 
 /*
-This function create the name of image 
-@cardShortName: Card short name
+  The function create the name of image 
+  @cardShortName: Card short name
 */
 function createImageName(cardShortName) {
   let imagePath = "";
@@ -213,8 +216,8 @@ function createImageName(cardShortName) {
 }
 
 /*
-function check if game over by comapring the 
-number of cards in two player's deck
+  The function check if game over by comapring the 
+  number of cards in two player's deck
 */
 function isGameOver(player1D, player2D) {
   let isGameOverFlag = false;
@@ -229,7 +232,7 @@ function isGameOver(player1D, player2D) {
 }
 
 /*
-function to set the background picture of winner
+  The function to set the background picture of winner
 */
 function winnerAnnouncment() {
   state.winner == 1
