@@ -1,3 +1,4 @@
+//Author: Farnaz Towhidi
 const inpSuffle = document.getElementById("btnShuffle");
 const inpDraw = document.getElementById("btnDraw");
 const imgPlayer1 = document.getElementById("imgPlayer1Card");
