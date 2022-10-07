@@ -20,17 +20,14 @@ function initialize() {
     player2Counter: 0,
     winner: 0,
   };
-
-  divWar.style.background =
-    "url('https://static.vecteezy.com/system/resources/previews/002/375/040/original/modern-white-background-free-vector.jpg')";
-  // inpSuffle.addEventListener("click", shuffle);
-  // inpDraw.addEventListener("click", draw);
+  imgPlayer1.src = "";
+  imgPlayer2.src = "";
   parPlayer1Status.innerHTML = "";
   parPlayer2Status.innerHTML = "";
   parWinner.innerHTML = "";
   inpSuffle.style.display = "inline";
   inpDraw.style.display = "none";
-  clearWarZone();
+  renderEmptyWarZone();
 }
 
 inpSuffle.addEventListener("click", shuffle);
@@ -41,6 +38,8 @@ inpDraw.addEventListener("click", draw);
   divide it to two players
 */
 function shuffle() {
+  divWar.style.background =
+    "url('https://static.vecteezy.com/system/resources/previews/002/375/040/original/modern-white-background-free-vector.jpg')";
   // Create unshuffle deck
   initialize();
   for (i = 0; i < state.suits.length; i++) {
@@ -86,7 +85,7 @@ function draw() {
     state.player1Deck.pop();
     state.player2Deck.pop();
   }
-  isGameOver(state.player1Deck, state.player2Deck);
+  if (isGameOver(state.player1Deck, state.player2Deck)) winnerAnnouncment();
 }
 
 /*
@@ -107,19 +106,18 @@ function compareCards(card1, card2) {
     state.player2Counter++;
     renderWinnerCounter(state.player2Deck, 2);
   } else {
-    renderWarZone(state.player1Deck, 0);
-    renderWarZone(state.player2Deck, 0);
+    renderFillWarZone(state.player1Deck, 0);
+    renderFillWarZone(state.player2Deck, 0);
     let i = 0;
     while (i < 3) {
-      //if (isGameOver) break;
-
       // Add card to play 1 and play 2 slot
-      renderWarZone(state.player1Deck, 1);
-      renderWarZone(state.player2Deck, 1);
+      renderFillWarZone(state.player1Deck, 1);
+      renderFillWarZone(state.player2Deck, 1);
       i++;
     }
     let imgWarCards = document.querySelectorAll(".cardWar");
-
+    // Set the left and top position of the cards in the
+    // war zone
     let IncValue = 10;
     imgWarCards.forEach(function (item) {
       item.style.top = IncValue + "px";
@@ -137,14 +135,13 @@ function compareCards(card1, card2) {
 Function add image to war zone 
 and then delete image from deck
 */
-function renderWarZone(Deck, showBackFlag) {
+function renderFillWarZone(Deck, showBackFlag) {
   let divImagContainer = document.createElement("div");
   let ImgPCard = document.createElement("img");
 
   showBackFlag
     ? (ImgPCard.src = "./images/backs/blue.svg")
     : (ImgPCard.src = createImageName(Deck[Deck.length - 1]));
-
   ImgPCard.classList.add("cardWar");
   divImagContainer.appendChild(ImgPCard);
 
@@ -164,7 +161,7 @@ function renderWinnerCounter(flgPlayer) {
     : (state.player2Counter = state.player2Counter + state.tableCards.length);
 
   state.tableCards.length = 0;
-  clearWarZone();
+  renderEmptyWarZone();
 }
 
 /*
@@ -220,32 +217,33 @@ number of cards in two player's deck
 */
 function isGameOver(player1D, player2D) {
   let isGameOverFlag = false;
-  let winnerMessage = "";
 
   if (player1D.length == 0 && player2D.length == 0) {
-    if (state.player1Counter > state.player2Counter) {
-      state.winner = 1;
-      divWar.style.background = "url('./images/player1.jpg')";
-    } else {
-      state.winner = 2;
-      divWar.style.background = "url('./images/player2.jpg')";
-    }
+    state.player1Counter > state.player2Counter
+      ? (state.winner = 1)
+      : (state.winner = 2);
     isGameOverFlag = true;
   }
-
-  if (isGameOverFlag == true) {
-    winnerMessage = "Congratulation! winner is player " + state.winner;
-    clearWarZone();
-  }
-
-  parWinner.textContent = winnerMessage;
   return isGameOverFlag;
 }
 
 /*
-  The function remore all cards from war zone
+function to set the background picture of winner
 */
-function clearWarZone() {
+function winnerAnnouncment() {
+  state.winner == 1
+    ? (divWar.style.background = "url('./images/player1.jpg')")
+    : (divWar.style.background = "url('./images/player2.jpg')");
+  divWar.style.backgroundRepeat = "no-repeat";
+  initialize();
+  //renderEmptyWarZone();
+  parWinner.textContent = `Congratulation, The winner is player ${state.winner}`;
+}
+
+/*
+  The function empty war zone
+*/
+function renderEmptyWarZone() {
   let imgWarCards = document.querySelectorAll(".cardWar");
   imgWarCards.forEach((item) => {
     item.remove();
