@@ -25,7 +25,6 @@ function initialize() {
   imgPlayer2.src = "";
   parPlayer1Status.innerHTML = "";
   parPlayer2Status.innerHTML = "";
-  parWinner.innerHTML = "";
   inpSuffle.style.display = "inline";
   inpDraw.style.display = "none";
   renderEmptyWarZone();
@@ -39,6 +38,7 @@ inpDraw.addEventListener("click", draw);
   divide it to two players
 */
 function shuffle() {
+  parWinner.innerHTML = "";
   divWar.style.background =
     "url('https://static.vecteezy.com/system/resources/previews/002/375/040/original/modern-white-background-free-vector.jpg')";
   // Create unshuffle deck
@@ -236,9 +236,9 @@ function winnerAnnouncment() {
     ? (divWar.style.background = "url('./images/player1.jpg')")
     : (divWar.style.background = "url('./images/player2.jpg')");
   divWar.style.backgroundRepeat = "no-repeat";
-  initialize();
-  //renderEmptyWarZone();
+
   parWinner.textContent = `Congratulation, The winner is player ${state.winner}`;
+  initialize();
 }
 
 /*
