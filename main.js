@@ -1,4 +1,4 @@
-//Author: Farnaz Towhidi
+//Author: Farnaz Towhidiiii
 const inpSuffle = document.getElementById("btnShuffle");
 const inpDraw = document.getElementById("btnDraw");
 const imgPlayer1 = document.getElementById("imgPlayer1Card");
