@@ -20,7 +20,7 @@ The project is done using Html, CSS and javascript.
 
 ### Getting Started
 
-In the process.
+To see this game, [click here](https://farnaztowhidi.github.io/warCardGame/)
 
 ### Next Steps
 

@@ -1,8 +1,9 @@
 const inpSuffle = document.getElementById("btnShuffle");
-const inpDeal = document.getElementById("btnDeal");
+const inpDraw = document.getElementById("btnDraw");
 const imgPlayer1 = document.getElementById("imgPlayer1Card");
 const imgPlayer2 = document.getElementById("imgPlayer2Card");
 const divWar = document.querySelector("#warZone");
+
 let parWinner = document.getElementById("parWin");
 let parPlayer1Status = document.getElementById("parPlayer1");
 let parPlayer2Status = document.getElementById("parPlayer2");
@@ -17,26 +18,38 @@ function initialize() {
     player2Deck: [],
     player1Counter: 0,
     player2Counter: 0,
+    winner: 0,
   };
-  inpSuffle.addEventListener("click", shuffle);
-  inpDeal.addEventListener("click", draw);
+
+  divWar.style.background =
+    "url('https://static.vecteezy.com/system/resources/previews/002/375/040/original/modern-white-background-free-vector.jpg')";
+  // inpSuffle.addEventListener("click", shuffle);
+  // inpDraw.addEventListener("click", draw);
   parPlayer1Status.innerHTML = "";
   parPlayer2Status.innerHTML = "";
   parWinner.innerHTML = "";
   inpSuffle.style.display = "inline";
-  inpDeal.style.display = "none";
+  inpDraw.style.display = "none";
+  clearWarZone();
 }
 
+inpSuffle.addEventListener("click", shuffle);
+inpDraw.addEventListener("click", draw);
+
 /*
-This function shuffle the deck and
+  This function shuffle the deck and
+  divide it to two players
 */
 function shuffle() {
   // Create unshuffle deck
+  initialize();
   for (i = 0; i < state.suits.length; i++) {
     for (j = 2; j < 15; j++) {
       state.deck.push(state.suits[i] + j);
     }
   }
+  state.deck.push("J15");
+  state.deck.push("J15");
 
   for (i = 0; i < state.deck.length; i++) {
     ranNumber = Math.floor(Math.random() * 52);
@@ -49,29 +62,31 @@ function shuffle() {
   state.player1Deck = state.deck.slice(0, 26);
   state.player2Deck = state.deck.slice(26, 52);
   inpSuffle.style.display = "none";
-  inpDeal.style.display = "inline";
+  inpDraw.style.display = "inline";
 }
 
 /*
+  Function that shows the top card of each player
+  and comapre them
  */
 function draw() {
-  let NumofPlayer1Cards = state.player1Deck.length;
-  let NumofPlayer2Cards = state.player2Deck.length;
+  if (state.player1Deck.length > 0 && state.player2Deck.length > 0) {
+    imgPlayer1.src = createImageName(
+      state.player1Deck[state.player1Deck.length - 1]
+    );
 
-  if (NumofPlayer1Cards > 0 && NumofPlayer2Cards > 0) {
-    imgPlayer1.src = createImageName(state.player1Deck[NumofPlayer1Cards - 1]);
-
-    imgPlayer2.src = createImageName(state.player2Deck[NumofPlayer2Cards - 1]);
+    imgPlayer2.src = createImageName(
+      state.player2Deck[state.player2Deck.length - 1]
+    );
 
     compareCards(
-      state.player1Deck[NumofPlayer1Cards - 1],
-      state.player2Deck[NumofPlayer2Cards - 1]
+      state.player1Deck[state.player1Deck.length - 1],
+      state.player2Deck[state.player2Deck.length - 1]
     );
     state.player1Deck.pop();
     state.player2Deck.pop();
   }
   isGameOver(state.player1Deck, state.player2Deck);
-  inpSuffle.style.display = "none";
 }
 
 /*
@@ -87,20 +102,20 @@ function compareCards(card1, card2) {
 
   if (num1 > num2) {
     state.player1Counter++;
-    addWarCardstoWinner(state.player1Deck, 1);
+    renderWinnerCounter(state.player1Deck, 1);
   } else if (num2 > num1) {
     state.player2Counter++;
-    addWarCardstoWinner(state.player1Deck, 2);
+    renderWinnerCounter(state.player2Deck, 2);
   } else {
-    addCardtoWarZone(state.player1Deck, 0);
-    addCardtoWarZone(state.player2Deck, 0);
+    renderWarZone(state.player1Deck, 0);
+    renderWarZone(state.player2Deck, 0);
     let i = 0;
     while (i < 3) {
       //if (isGameOver) break;
 
       // Add card to play 1 and play 2 slot
-      addCardtoWarZone(state.player1Deck, 1);
-      addCardtoWarZone(state.player2Deck, 1);
+      renderWarZone(state.player1Deck, 1);
+      renderWarZone(state.player2Deck, 1);
       i++;
     }
     let imgWarCards = document.querySelectorAll(".cardWar");
@@ -122,7 +137,7 @@ function compareCards(card1, card2) {
 Function add image to war zone 
 and then delete image from deck
 */
-function addCardtoWarZone(Deck, showBackFlag) {
+function renderWarZone(Deck, showBackFlag) {
   let divImagContainer = document.createElement("div");
   let ImgPCard = document.createElement("img");
 
@@ -138,17 +153,18 @@ function addCardtoWarZone(Deck, showBackFlag) {
   state.tableCards.push(Deck[Deck.length - 1]);
 }
 
-function addWarCardstoWinner(flgPlayer) {
-  let imgWarCards = document.querySelectorAll(".cardWar");
+/*
+  The function add all cards in the war zone
+  to the winner
+*/
+function renderWinnerCounter(flgPlayer) {
   // Add Cards of war zone to winner counter
   flgPlayer == 1
     ? (state.player1Counter = state.player1Counter + state.tableCards.length)
     : (state.player2Counter = state.player2Counter + state.tableCards.length);
 
   state.tableCards.length = 0;
-  imgWarCards.forEach((item) => {
-    item.remove();
-  });
+  clearWarZone();
 }
 
 /*
@@ -174,6 +190,9 @@ function createImageName(cardShortName) {
     case "S":
       suitName = "spades";
       break;
+    case "J":
+      suitName = "jokers";
+      break;
   }
 
   if (pipNumber < 10 && pipNumber > 1) {
@@ -188,6 +207,8 @@ function createImageName(cardShortName) {
     pipName = "K";
   } else if (pipNumber == 14) {
     pipName = "A";
+  } else if (pipNumber == 15) {
+    pipName = "black";
   }
   imagePath = `./images/${suitName}/${suitName}-${pipName}.svg`;
   return imagePath;
@@ -201,22 +222,34 @@ function isGameOver(player1D, player2D) {
   let isGameOverFlag = false;
   let winnerMessage = "";
 
-  if (player1D.length == 0) {
-    winnerMessage = "Congratulation! winner is player 2";
-    isGameOverFlag = true;
-  } else if (player2D.length == 0) {
-    winnerMessage = "Congratulation! winner is player 1";
+  if (player1D.length == 0 && player2D.length == 0) {
+    if (state.player1Counter > state.player2Counter) {
+      state.winner = 1;
+      divWar.style.background = "url('./images/player1.jpg')";
+    } else {
+      state.winner = 2;
+      divWar.style.background = "url('./images/player2.jpg')";
+    }
     isGameOverFlag = true;
   }
 
-  parWinner.textContent = winnerMessage;
   if (isGameOverFlag == true) {
-    inpSuffle.style.display = "inline";
-    inpDeal.style.display = "none";
-    divWar.style.background = "url('./images/player2.jpg')";
-    divWar.style.backgroundRepeat = "no-repeat";
+    winnerMessage = "Congratulation! winner is player " + state.winner;
+    clearWarZone();
   }
+
+  parWinner.textContent = winnerMessage;
   return isGameOverFlag;
+}
+
+/*
+  The function remore all cards from war zone
+*/
+function clearWarZone() {
+  let imgWarCards = document.querySelectorAll(".cardWar");
+  imgWarCards.forEach((item) => {
+    item.remove();
+  });
 }
 
 initialize();
