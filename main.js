@@ -99,19 +99,21 @@ function draw() {
 function compareCards(card1, card2) {
   let num1 = parseInt(card1.slice(1, card1.length));
   let num2 = parseInt(card2.slice(1, card2.length));
-
+  console.log("num1:" + num1 + " num2:" + num2);
   if (num1 > num2) {
     state.player1Counter++;
-    renderWinnerCounter(state.player1Deck, 1);
+    //renderWinnerCounter(state.player1Deck, 1);
+    renderWinnerCounter(1, 1);
   } else if (num2 > num1) {
     state.player2Counter++;
-    renderWinnerCounter(state.player2Deck, 2);
+    //renderWinnerCounter(state.player2Deck, 2);
+    renderWinnerCounter(2, 2);
   } else {
     renderFillWarZone(state.player1Deck, 0);
     renderFillWarZone(state.player2Deck, 0);
     let i = 0;
     while (i < 3) {
-      // Add card to play 1 and play 2 slot
+      // Add 3 card to war zone
       renderFillWarZone(state.player1Deck, 1);
       renderFillWarZone(state.player2Deck, 1);
       i++;
@@ -157,6 +159,7 @@ function renderFillWarZone(Deck, showBackFlag) {
 */
 function renderWinnerCounter(flgPlayer) {
   // Add Cards of war zone to winner counter
+  console.log("flagPlayer" + flgPlayer);
   flgPlayer == 1
     ? (state.player1Counter = state.player1Counter + state.tableCards.length)
     : (state.player2Counter = state.player2Counter + state.tableCards.length);
